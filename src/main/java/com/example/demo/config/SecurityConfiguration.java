@@ -52,7 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/login").permitAll()
-			.antMatchers("/registration").permitAll()
+			.antMatchers("/register").permitAll()
 			.antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
 			.authenticated().and().csrf().disable().formLogin()
 			.loginPage("/login").failureUrl("/login?error=true")
@@ -62,13 +62,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.and().logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/").and().exceptionHandling()
-			.accessDeniedPage("/partials/access-denied");
+			.accessDeniedPage("/access-denied");
 	}
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 		web
 			.ignoring()
-		.antMatchers("/resources/**","/partials/**", "/static/**", "/css/**", "/js/**", "/images/**");
+		.antMatchers("/resources/**", "/static/**", "/partials/**", "/css/**", "/js/**", "/images/**");
 	}
 }
