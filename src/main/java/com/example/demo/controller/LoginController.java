@@ -24,7 +24,7 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST, 
+	@RequestMapping(value = "/login", method = RequestMethod.GET, 
 			produces = MediaType.APPLICATION_JSON_VALUE)
 	public User login(@RequestBody User user){
 		System.out.println("######## Subiu ##########");
