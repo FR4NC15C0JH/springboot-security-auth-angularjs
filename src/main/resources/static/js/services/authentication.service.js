@@ -35,8 +35,11 @@
             /* Use this for real authentication
              ----------------------------------------------*/
             $http.post('/api/login', { email: email, password: password })
-                .success(function (response) {
+                .then(function success(response) {
                     callback(response);
+                    console.log(response);
+                 }, function error(response){
+                	console.log(response);
                 });
 
         }
