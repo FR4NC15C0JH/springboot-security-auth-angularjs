@@ -32,6 +32,11 @@ public class UserServiceImpl implements UserService{
     public User findUserByEmailAndPassword(String email, String password) {
         return userRepository.findOneByEmailAndPassword(email, password);
     }
+    
+	@Override
+	public User getUser(Long id) {
+		return userRepository.findOne(id);
+	}
 
 	@Override
 	public void saveUser(User user) {

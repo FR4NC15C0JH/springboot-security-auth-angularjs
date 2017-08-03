@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,16 +30,18 @@ public class LoginController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/login", method = RequestMethod.POST, 
-			produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> login(@RequestBody User user ){
+	@RequestMapping(value = "/login", method = RequestMethod.GET, 
+			produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> login(@RequestBody User user ){
+		System.out.println("######### Passei Aqui! ##########");
 		if(StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getPassword())){
-			return new ResponseEntity<>(new User(), HttpStatus.OK);
+			return new ResponseEntity<User>(new User(), HttpStatus.OK);
 		}
 		if(userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword()) == null){
-			return new ResponseEntity<>(new User(), HttpStatus.OK);
+			return new ResponseEntity<User>(new User(), HttpStatus.OK);
 		}
-		return new ResponseEntity<>(userService.findUserByEmail(user.getEmail()), HttpStatus.OK);
+		return new ResponseEntity<User>(userService.findUserByEmail(user.getEmail()), HttpStatus.OK);		
+//		return new ResponseEntity<>(userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword()), HttpStatus.OK);
 	}
 	
 //	@RequestMapping(value="/login", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -75,7 +78,11 @@ public class LoginController {
 //		}
 //		return modelAndView;
 //	}
-//	
+	@RequestMapping(value="/admin/home", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> getUser(@PathVariable Long id){
+		return new ResponseEntity<User>(userService.getUser(id), HttpStatus.OK);
+	}
+	
 //	@RequestMapping(value="/admin/home", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 //	public ModelAndView home(){
 //		ModelAndView modelAndView = new ModelAndView();

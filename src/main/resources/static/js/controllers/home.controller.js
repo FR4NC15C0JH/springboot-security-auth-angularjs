@@ -8,38 +8,39 @@
     HomeController.$inject = ['UserService', '$rootScope'];
     function HomeController(UserService, $rootScope) {
         var vm = this;
+          
+          vm.user = {};	
+//        vm.user = null;
+//        vm.allUsers = [];
+//        vm.deleteUser = deleteUser;
 
-        vm.user = null;
-        vm.allUsers = [];
-        vm.deleteUser = deleteUser;
-
-        initController();
-
-        function initController() {
-            loadCurrentUser();
-            loadAllUsers();
-        }
-
+//        initController();
+//
+//        function initController() {
+//            loadCurrentUser();
+//            loadAllUsers();
+//        }
+//
         function loadCurrentUser() {
-            UserService.GetByUsername($rootScope.globals.currentUser.username)
+            UserService.getUser(user.id)
                 .then(function (user) {
                     vm.user = user;
                 });
         }
-
-        function loadAllUsers() {
-            UserService.GetAll()
-                .then(function (users) {
-                    vm.allUsers = users;
-                });
-        }
-
-        function deleteUser(id) {
-            UserService.Delete(id)
-            .then(function () {
-                loadAllUsers();
-            });
-        }
+//
+//        function loadAllUsers() {
+//            UserService.GetAll()
+//                .then(function (users) {
+//                    vm.allUsers = users;
+//                });
+//        }
+//
+//        function deleteUser(id) {
+//            UserService.Delete(id)
+//            .then(function () {
+//                loadAllUsers();
+//            });
+//        }
     }
 
 })();

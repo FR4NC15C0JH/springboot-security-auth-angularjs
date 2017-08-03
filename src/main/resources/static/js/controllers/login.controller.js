@@ -17,11 +17,13 @@
         })();
 
         function login() {
+        	console.log('Inside login');
             vm.dataLoading = true;
             AuthenticationService.Login(vm.email, vm.password, function (response) {
                 if (response.success) {
+                	console.log('Inside login success');
                     AuthenticationService.SetCredentials(vm.email, vm.password);
-                    $location.path('/');
+                    $location.path('/home');
                 } else {
                     FlashService.Error(response.message);
                     vm.dataLoading = false;

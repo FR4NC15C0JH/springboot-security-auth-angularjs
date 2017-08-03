@@ -8,15 +8,20 @@
     UserService.$inject = ['$http'];
     function UserService($http) {
         var service = {};
-
+          
+          service.getUser = getUser;
 //        service.GetAll = GetAll;
 //        service.GetById = GetById;
-        service.GetByEmail = GetByEmail;
-        service.createNewUser = createNewUser;
+//        service.GetByEmail = GetByEmail;
+//        service.createNewUser = createNewUser;
 //        service.Update = Update;
 //        service.Delete = Delete;
 
         return service;
+        
+        function getUser(id) {
+    		   return $http.get('/api/admin/home:id' + {id: '@id'}).then(handleSuccess, handleError('Error getting user by id'));
+  	    }	
 
 //        function GetAll() {
 //            return $http.get('/api/users').then(handleSuccess, handleError('Error getting all users'));
@@ -25,14 +30,14 @@
 //        function GetById(id) {
 //            return $http.get('/api/users/' + id).then(handleSuccess, handleError('Error getting user by id'));
 //        }
-
-        function GetByEmail(email) {
-            return $http.get('/user/getUserEmail' + email).then(handleSuccess, handleError('Error getting user by email'));
-        }
-
-        function createNewUser(user) {
-            return $http.post('/api/register', user).then(handleSuccess, handleError('Error creating user'));
-        }
+//
+//        function GetByEmail(email) {
+//            return $http.get('/user/getUserEmail' + email).then(handleSuccess, handleError('Error getting user by email'));
+//        }
+//
+//        function createNewUser(user) {
+//            return $http.post('/api/register', user).then(handleSuccess, handleError('Error creating user'));
+//        }
 
 //        function Update(user) {
 //            return $http.put('/api/users/' + user.id, user).then(handleSuccess, handleError('Error updating user'));

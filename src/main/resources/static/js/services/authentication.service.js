@@ -34,12 +34,14 @@
 
             /* Use this for real authentication
              ----------------------------------------------*/
-            $http.post('/api/login', { email: email, password: password })
+            $http.get('/api/login', { email: email, password: password })
                 .then(function success(response) {
-                    callback(response);
-                    console.log(response);
+                		console.log('Inside function service success');
+                		callback(response);
+                		console.log(response);
                  }, function error(response){
-                	console.log(response);
+                	 	console.log('Inside function service error');
+                	 	console.log(response);
                 });
 
         }
